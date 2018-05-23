@@ -1,4 +1,12 @@
-require 'rspec_spec'
+require './minutetable'
+require './hour'
+require './day'
+require './month_factory'
+require './year'
+require './ttime'
+require './date'
+require './datetime'
+require 'pry'
 
 describe Year do
     describe '.new' do

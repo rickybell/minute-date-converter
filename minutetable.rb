@@ -1,12 +1,13 @@
 module Minutetable
-    attr_reader :value,:minutes
-    
+    attr_reader :value,:minutes,:message_erro
+    @message_erro = "Minutetable: Value should be greater then 0"
     def initialize(value = nil)
+        # @message_erro = "Minutetable: Value should be greater then 0"
         if !value.nil? && value > 0
             @value = value.nil? ? 0 : value
             @minutes = 1
         else
-            raise StandardError, "Value should be greater then 0"
+            raise ArgumentError.new(@message_erro)
         end
     end
     

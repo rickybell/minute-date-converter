@@ -27,8 +27,11 @@ class Datetime
     end
 
     def self.from_minutes(minutes)
+        
         from_date = Date::from_minutes(minutes)
+        
         from_time = Ttime::from_minutes(minutes - from_date.minutes)
+        
         return Datetime.new({
             :day => from_date.day.value,
             :month => from_date.month.value,

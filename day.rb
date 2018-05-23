@@ -4,6 +4,7 @@ class Day
     HOURS_OF_DAY = 24
     AMOUNT_MINUTES = Day::HOURS_OF_DAY * Hour::AMOUNT_MINUTES
     def initialize(value = nil)
+        @message_erro = "Day: Value should be greater then 0"
         super(value)
         @minutes = Day::AMOUNT_MINUTES
     end

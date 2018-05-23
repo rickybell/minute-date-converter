@@ -10,15 +10,15 @@ require 'pry'
 
 describe Date do
     context 'simple date' do
-        let(:date)  { Date.new(
-                {
-                    :day => Day.new(3),
-                    :month => MonthFactory.build(3),
-                    :year => Year.new(2010)
-                }
-        )}
-        describe '.new' do
-            context 'after creation' do 
+        context 'after creation' do 
+            subject(:date)  { Date.new(
+                    {
+                        :day => Day.new(3),
+                        :month => MonthFactory.build(3),
+                        :year => Year.new(2010)
+                    }
+            )}
+            describe '.new' do
                 it "date should be 'Date' valid class" do
                     expect(date.day.value).to eq(3)
                 end
@@ -29,31 +29,15 @@ describe Date do
                     expect(date.year.value).to eq(2010)
                 end
             end
-            context 'when with a value of days low then one day' do
-                # 1056586979
-                # it expect(date.minutes).to eq(1056586979)
-                
-                subject(:dateinvalid) { Date.new({
-                        :day => Day.new(0),
-                        :month => MonthFactory.build(4),
-                        :year => Year.new(2010)
-                    })
-                }
-                
-                it { should be_kind_of(Date)}
-                it {date.day.value.should == 31}
-                it {date.month.value.should == 3}
-                it {date.year.value.should == 2010}
+            describe '#minutes' do
+                it  "should return the total amount of minutes from Date" do 
+                    expect(date.minutes).to eq(1056545280)
+                end
             end
-        end
-        describe '#minutes' do
-            it  "should return the total amount of minutes from Date" do 
-                expect(date.minutes).to eq(1056545280)
-            end
-        end
-        describe '#to_s' do 
-            it 'should print like a format DD/MM/YYYY' do
-                expect(date.to_s).to eq('03/03/2010')
+            describe '#to_s' do 
+                it 'should print like a format DD/MM/YYYY' do
+                    expect(date.to_s).to eq('03/03/2010')
+                end
             end
         end
     end
@@ -65,5 +49,20 @@ describe Date do
             it {date.month.value.should == 3}
             it {date.year.value.should == 2010}
         end
+    end
+    context 'when with a value of days low then one complete day' do
+        subject(:date) {Date::from_minutes(1056586979)}
+        it { should be_kind_of(Date)}
+        it {date.day.value.should == 31}
+        it {date.month.value.should == 3}
+        it {date.year.value.should == 2010}
+    end
+
+    context 'when with have a value of month low then one complete month' do
+        subject(:date) {Date::from_minutes(1056458820)} # 1/1/2010
+        it { should be_kind_of(Date)}
+        it {date.day.value.should == 1}
+        it {date.month.value.should == 1}
+        it {date.year.value.should == 2010}
     end
 end

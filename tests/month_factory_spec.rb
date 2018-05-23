@@ -1,4 +1,12 @@
-require 'rspec_spec'
+require './minutetable'
+require './hour'
+require './day'
+require './month_factory'
+require './year'
+require './ttime'
+require './date'
+require './datetime'
+require 'pry'
 
 describe MonthFactory do
     describe '.build' do
@@ -70,7 +78,7 @@ describe MonthFactory do
         describe 'amount minutes' do
             context 'for year and days of incomplete month' do
                 subject(:month) { MonthFactory.build(4) }
-                it { month.amount_of_minutes_since_start_of_year(Day.new(5)).should ==  136800 }
+                it { month.amount_of_minutes_since_start_of_year(Day.new(5).amount).should ==  136800 }
             end
         end
     end
@@ -83,10 +91,16 @@ describe MonthFactory do
     end
 
     describe '::from_minutes' do
-        context "when convert amount of minutes to 'Month' object" do
-            subject(:month) { MonthFactory::from_minutes(89280)}
-            it { should be_kind_of(Month31)}
-            it { month.value.should == 3}
+        describe "when convert amount of minutes" do
+            context "value to create 3 months" do
+                subject(:month) { MonthFactory::from_minutes(89280)}
+                it { should be_kind_of(Month31)}
+                it { month.value.should == 3}
+            end
+        
+            it "low than a completed month." do
+                expect{MonthFactory::from_minutes(44000)}.to raise_error(ArgumentError,"Month: Invalid value, value between 1 and 12.")
+            end
         end
     end
 end

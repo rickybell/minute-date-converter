@@ -1,4 +1,12 @@
-require 'rspec_spec.rb'
+require './minutetable'
+require './hour'
+require './day'
+require './month_factory'
+require './year'
+require './ttime'
+require './date'
+require './datetime'
+require 'pry'
 
 describe Ttime do
     context 'simple time object' do 

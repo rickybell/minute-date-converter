@@ -52,8 +52,8 @@ describe Datetime do
         describe "::from_minutes" do
             subject(:datetime) { Datetime::from_minutes(1056651168)}
             it { should be_kind_of(Datetime)}
-            # it { datetime.data.to_s.should == "15/05/2010"}
-            # it { datetime.time.to_s.should == "12:48" }
+            it { datetime.date.to_s.should == "15/05/2010"}
+            it { datetime.time.to_s.should == "12:48" }
         end
     end
 end

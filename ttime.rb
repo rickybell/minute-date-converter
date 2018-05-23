@@ -2,7 +2,7 @@
 class Ttime
     attr_reader :hour, :mins
     def initialize(args)
-        @hour = args.fetch(:hour,Hour.new(0))
+        @hour = args.fetch(:hour,Hour.new(1))
         @mins = args.fetch(:minutes,0)
     end
 

@@ -14,11 +14,10 @@ class Month
         i = 1
         amount_of_minutes = 0
         until i >= value.to_i do 
-            fake_month = MonthFactory::build(i)
-            amount_of_minutes = amount_of_minutes + fake_month.minutes
+            amount_of_minutes = amount_of_minutes + MonthFactory::build(i).minutes
             i += 1
         end
-        amount_of_minutes = amount_of_minutes + day_of_month.amount
+        amount_of_minutes = amount_of_minutes + day_of_month
     end
 
     def to_s
@@ -55,19 +54,25 @@ class MonthFactory
             my_return = Month30.new(month_in_number)
         elsif month_in_number == 2 then
             my_return = Month28.new(month_in_number)
+        else
+            raise ArgumentError.new("Month: Invalid value, value between 1 and 12.")
         end
         return my_return
     end
     def self.from_minutes(minutes)
         last_minutes = minutes
-        i = 1
-        until last_minutes < 0 
-            if (last_minutes/MonthFactory::build(i).minutes) > 0
-                last_minutes = last_minutes - MonthFactory::build(i).minutes
-            else
-                break
-            end 
-            i += 1
+        i = 0
+        begin
+            until last_minutes < 0 
+                if (last_minutes/MonthFactory::build(i + 1).minutes) > 0 
+                    last_minutes = last_minutes - MonthFactory::build(i + 1).minutes
+                    i += 1
+                else
+                    i = (i > 0 ? i + 1 : 0)
+                    break
+                end 
+            end
+        rescue
         end
         return MonthFactory::build(i)
     end

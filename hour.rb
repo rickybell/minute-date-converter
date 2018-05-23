@@ -2,7 +2,7 @@ class Hour
     include Minutetable
     AMOUNT_MINUTES = 60
     def initialize(value = nil)
-        super(value)
+        @value = value.nil? ? 0 : value
         @amount = Hour::AMOUNT_MINUTES
         @minutes = Hour::AMOUNT_MINUTES
     end

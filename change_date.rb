@@ -40,9 +40,43 @@ class Utils
     end
 end
 
-# puts(Utils.change_date("01/04/2010 23:00", '-', 1441))
-puts(Date::from_minutes(1056586979).to_s)
+# puts(Utils.change_date("01/01/2010 23:00", '+', 1440))
 
 # myday = Day.new()
 # puts myday.amount
+# 1/1/2010 23:00 = 1056458820
+# @datetime = Datetime.new({
+#             :day => 1,
+#             :month => 1,
+#             :year => 2010,
+#             :hour => 23,
+#             :minutes => 00
+#         })
+# @datetime = Datetime::from_minutes(1056454560)
+# puts @datetime.to_s
+
+
+# @datetime = Datetime::from_minutes(1056460260)
+# puts @datetime.to_s
+
+# @date = Date.new({
+#     :day => Day.new(1),
+#     :month => MonthFactory.build(1),
+#     :year => Year.new(2010)
+# })
+# puts @date.minutes
+
+# @datetime = Datetime.new({
+#     :day => 1,
+#     :month => 1,
+#     :year => 2010,
+#     :hour => 23,
+#     :minutes => 00
+# })
+# puts "x " + @datetime.to_s
+# puts @datetime.minutes
+# puts(Utils.change_date("01/03/2010 23:00", '-', 1440))
+puts(Datetime.from_minutes(1056458820).to_s)
+# puts(Date.from_minutes(1056461700).to_s)
+
 
